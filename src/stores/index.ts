@@ -8,37 +8,9 @@ const store = createStore<GlobalDataProps>({
    * 如果有些状态严格属于单个组件，最好还是作为组件的局部状态。你应该根据你的应用开发需要进行权衡和确定。
    */
   state: {
-    // 测试数据
-    list: [
-      {
-        id: 0,
-        img: 'src/assets/rope.png',
-        name: '跳绳',
-        price: 10,
-        nums: 0
-      },
-      {
-        id: 1,
-        img: 'src/assets/rope1.png',
-        name: '跳绳1',
-        price: 100,
-        nums: 0
-      },
-      {
-        id: 2,
-        img: 'src/assets/watch.png',
-        name: '手环',
-        price: 200,
-        nums: 0
-      },
-      {
-        id: 3,
-        img: 'src/assets/watch1.png',
-        name: '手环1',
-        price: 300,
-        nums: 0
-      },
-    ],
+    /** 商品列表数据 */
+    list: [],
+    /** 购物车列表数据 */
     cartList: [],
   },
 
@@ -71,6 +43,40 @@ const store = createStore<GlobalDataProps>({
    * 这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数
    */
   mutations: {
+    /** 初始化商品列表数据 */
+    initShopList(state) {
+      state.list = [
+        {
+          id: 0,
+          img: 'src/assets/rope.png',
+          name: '跳绳',
+          price: 10,
+          nums: 0
+        },
+        {
+          id: 1,
+          img: 'src/assets/rope1.png',
+          name: '跳绳1',
+          price: 100,
+          nums: 0
+        },
+        {
+          id: 2,
+          img: 'src/assets/watch.png',
+          name: '手环',
+          price: 200,
+          nums: 0
+        },
+        {
+          id: 3,
+          img: 'src/assets/watch1.png',
+          name: '手环1',
+          price: 300,
+          nums: 0
+        },
+      ]
+    },
+
     /** 添加到购物车 */
     addCart(state, payload) {
       let flag = false
@@ -104,7 +110,16 @@ const store = createStore<GlobalDataProps>({
    * Action 可以包含任意异步操作。
    */
   actions: {
-    // 接口请求数据
+    // 模拟接口请求数据
+    getListRequest({ commit }) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      return new Promise((resolve, _reject) => {
+        setTimeout(() => {
+          commit('initShopList')
+          resolve(true)
+        }, 500)
+      })
+    }
   },
 })
 

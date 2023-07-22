@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import GoodsCard from '../components/GoodsCard.vue'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import store from '@/stores'
+
+// 请求接口
+onMounted(() => store.dispatch('getListRequest'))
 
 const list = computed(() => store.getters.getList)
 </script>
